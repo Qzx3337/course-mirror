@@ -15,7 +15,7 @@
 
 ``` problem i ``` 是第 i 道题目
 
-``` template ``` 是模板
+``` templates ``` 是模板
 
 # lecture 1 列表
 
