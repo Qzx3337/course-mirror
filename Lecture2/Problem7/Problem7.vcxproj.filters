@@ -38,5 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="p7.in" />
+    <None Include="README.MD" />
   </ItemGroup>
 </Project>
