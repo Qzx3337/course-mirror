@@ -1,7 +1,7 @@
 # 数据结构课程的课程作业
 
 
-https://gitee.com/Qzx3337/data-structure-course
+[Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
 
 - course
   - lectuer 1
