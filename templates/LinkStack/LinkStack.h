@@ -22,7 +22,7 @@ typedef struct LinkStackBody{
 /******** 只读接口 **********/
 
 int isEmpty(Stack s);
-int getSize(Stack s);
+int getStaSize(Stack s);
 StackElemType getTop(Stack s);
 
 /******** 可写接口 ************/
@@ -38,7 +38,7 @@ int isEmpty(Stack s) {
 	return s->size == 0;
 }
 
-inline int getSize(Stack s) {
+inline int getStaSize(Stack s) {
 	return s->size;
 }
 

@@ -86,7 +86,7 @@ inline int popQue(Queue que) {
 	if (que->size == 0) return false;
 	eraseNext(que->back);
 	que->size--;
-	if (que->size == 0) que->front == que->back;
+	if (que->size == 0) que->front = que->back;
 	return true;
 }
 

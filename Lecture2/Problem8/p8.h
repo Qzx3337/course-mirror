@@ -14,6 +14,9 @@
 #define MAXN 99
 
 #include "Point.h"
+
 #define QueueElemType Point
 #include "LinkQueue.h"
+#define StackElemType Point
+#include "LinkStack.h"
 
