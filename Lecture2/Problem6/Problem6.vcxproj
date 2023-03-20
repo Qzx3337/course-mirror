@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="p6.in" />
+    <None Include="README.MD" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
