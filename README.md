@@ -1,40 +1,31 @@
-# 数据结构课程的课程作业
 
+# 数据结构课程作业
 
 [Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
-
-- course
-  - lectuer 1
-    - problem 1
-    -  problem 2
-    - problem 3
-  - lectuer 2
-  - lecture 3
-
-  - template
-
-``` lecutre i ``` 是第 i 次课的习题代码，
-
-``` problem i ``` 是第 i 道题目
-
-``` templates ``` 是模板
-
-# lecture 1 列表
-
-... ... 
-
-# lecture 2 栈与队列
-
-题目：
-
-1. 进制转换
-2. 回文串的判断
-3. 可含括号的算术表达式的求值
-4. 队列元素逆置
-5. 中缀表达式转换为后缀表达式
-6. 银行排队问题
-7. 停车场管理问题
-8. 迷宫问题
+在这里记一下做题历程
 
 
+## 目录
+
+- ```course``` 数据结构课程
+
+  - ```Lectuer 1``` 列表
+    - ```problem 1``` 删除顺序表中相同元素
+    - ```problem 2``` 查找单链表倒数第k个位置的节点
+    - ```problem 3``` 将一个单链表的从left到right位置之间的节点反转
+    - ```problem 4``` 单链表转换
+    - ```problem 5``` 双向链表反转
+    - ```problem 6``` 循环单链表拆分
+
+  - ```Lectuer 2``` 栈与队列
+    - ```problem 1``` 进制转换
+    - ```problem 2``` 回文串的判断
+    - ```problem 3``` 可含括号的算术表达式的求值
+    - ```problem 4``` 队列元素逆置
+    - ```problem 5``` 中缀表达式转换为后缀表达式
+    - ```problem 6``` 银行排队问题
+    - ```problem 7``` 停车场管理问题
+    - ```problem 8``` 迷宫问题
+
+  - ```Lectuer 3``` ?
 
