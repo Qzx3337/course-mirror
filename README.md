@@ -10,12 +10,14 @@
 - ```course``` 数据结构课程
 
   - ```Lectuer 1``` 列表
-    - ```problem 1``` 删除顺序表中相同元素
-    - ```problem 2``` 查找单链表倒数第k个位置的节点
-    - ```problem 3``` 将一个单链表的从left到right位置之间的节点反转
-    - ```problem 4``` 单链表转换
-    - ```problem 5``` 双向链表反转
-    - ```problem 6``` 循环单链表拆分
+    - ```problem 1``` 静态顺序表类
+    - ```problem 2``` 删除顺序表中相同元素
+    - ```problem 3``` 链表类
+    - ```problem 4``` 查找单链表倒数第k个位置的节点
+    - ```problem 5``` 将一个单链表的从left到right位置之间的节点反转
+    - ```problem 6``` 单链表转换
+    - ```problem 7``` 双向链表反转
+    - ```problem 8``` 循环单链表拆分
 
   - ```Lectuer 2``` 栈与队列
     - ```problem 1``` 进制转换
