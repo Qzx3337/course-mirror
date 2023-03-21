@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32802.440
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lecture1", "Lecture1", "{9594FA02-D8E8-40C2-AC0E-66DA1BC679D9}"
 EndProject
@@ -38,6 +38,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SeqStack", "templates\SeqStack\SeqStack.vcxproj", "{36B1691F-1B16-4967-9BEC-1A7AB7E68D90}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Problem8", "Lecture2\Problem8\Problem8.vcxproj", "{09CF5C3D-7BD0-4331-8568-7A0C5BC7645F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D21E32C-C431-4D54-898C-91635D87C803} = {4D21E32C-C431-4D54-898C-91635D87C803}
+		{E39722D4-35F8-4645-B5F7-1E6267F54765} = {E39722D4-35F8-4645-B5F7-1E6267F54765}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinkStack", "templates\LinkStack\LinkStack.vcxproj", "{E39722D4-35F8-4645-B5F7-1E6267F54765}"
 EndProject
