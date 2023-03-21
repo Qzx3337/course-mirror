@@ -3,7 +3,7 @@
 
 [Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
 
-[Code on github]()
+[Code on github](https://github.com/Qzx3337/data-structure-course)
 
 在这里记一下做题历程
 
