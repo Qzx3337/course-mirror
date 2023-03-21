@@ -1,8 +1,6 @@
 
 # 数据结构课程作业
 
-[Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
-
 [Code on github](https://github.com/Qzx3337/data-structure-course)
 
 在这里记一下做题历程
@@ -35,3 +33,7 @@
 
   - ```Lectuer 3``` ?
 
+
+  
+已经不使用
+[Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
