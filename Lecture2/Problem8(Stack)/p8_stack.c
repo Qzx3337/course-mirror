@@ -19,7 +19,9 @@ language: C.
 
 int mmap[MAXM][MAXN];	// 地图
 int pre[MAXM][MAXN];	// 用于寻找前驱结点，一个数字代表动作
+int vis[MAXM][MAXN] = { 0 };// 访问数组
 Point deltaP[9];		// 所有的动作对应的位移
+
 
 // 方法列表
 
@@ -27,55 +29,15 @@ void InitMap(int m, int n);
 void PrintMap(int m, int n);
 void InitDelta();
 int IsAvailable(Point pnt);
-int BFSpath(Point src, Point dst);
-void PrintPath(Point src, Point dst);
-
 int DFSpath(Point src, Point dst);
-
-// 深度优先搜索，并打印结果
-int DFSpath(Point src, Point dst) // 测试中？
-{
-    // 参数：起点src，终点dst
-	// 返回值：是否找到了路径
-	// 初始化栈
-	Stack sta;
-	initSta(&sta);
-	// 初始化访问数组
-	int vis[MAXM][MAXN] = { 0 };
-	// 初始化前驱数组
-	int pre[MAXM][MAXN] = { 0 };
-	// 初始化栈
-	pushSta(sta, src);
-	// 初始化访问数组
-	vis[src.x][src.y] = 1;
-	// 开始搜索
-	while (!isEmpty(sta)) {		// 栈不为空
-		Point cur = getTop(sta);	// 取栈顶元素
-		popSta(sta);				// 出栈
-		// 判断是否是终点
-		if (cur.x == dst.x && cur.y == dst.y) {
-			return true;
-		}
-		// 依次尝试所有的动作
-		int i;
-		for (i = 1; i <= DIRECTION_MODE; ++i) {		// 注意：这里从1开始，因为deltaP[0]是无效的
-			Point next = { cur.x + deltaP[i].x, cur.y + deltaP[i].y };		// 计算下一个点
-			// 判断是否可行
-			if (IsAvailable(next) && !vis[next.x][next.y]) {	// 可行且未被访问过
-				pushSta(sta, next);
-				vis[next.x][next.y] = 1;
-				pre[next.x][next.y] = i;
-			}
-		}
-	}
-	return false;		// 没有找到路径
-}
+void PrintPath(Point src, Point dst);
 
 
 // 主函数
 int main() {
 
 	freopen("p8.in", "r", stdin);		// 文件读入
+	//freopen("p8.out", "w", stdout);		// 文件输出
 
 	int m, n;
 	scanf("%d%d", &m, &n);
@@ -86,9 +48,8 @@ int main() {
 	scanf("%d%d%d%d", &src.x, &src.y, &dst.x, &dst.y);
 
 	InitDelta();
-
-	// BFS
-	if (BFSpath(src, dst)) {		// 找到了路径
+	
+	if (DFSpath(src, dst)) {		// 找到了路径
 		PrintPath(src, dst);
 		PrintMap(m, n);
 	}
@@ -121,31 +82,6 @@ void InitMap(int m, int n) {
 
 }
 
-// 打印地图
-void PrintMap(int m, int n) {
-	//printf("\nm=%d; n=%d\n", m, n);
-
-	printf("\n");
-	int i, j;
-	//for (i = 0; i <= m + 1; ++i) {			// 输出包括外围边缘
-	//	for (j = 0; j <= n + 1; ++j) {
-	for (i = 1; i <= m; ++i) {
-		for (j = 1; j <= n; ++j) {			// 墙体
-			if (mmap[i][j]) {
-				printf("1 ");
-			}
-			else if (pre[i][j] == -1) {		// 路径途径点
-				printf("* ");
-			}
-			else {
-				printf("0 ");				// 空格子
-			}
-		}
-		printf("\n");
-	}
-	printf("\n");
-}
-
 // 各个动作的位移
 void InitDelta() {
 	deltaP[0] = (Point){ 0,0 };		// 原地不动
@@ -166,39 +102,61 @@ int IsAvailable(Point pnt) {
 	return true;
 }
 
-// 广度优先搜索
-int BFSpath(Point src, Point dst) {
-
-	if (cmpPnt(src, dst)) return true;		// 起点重点重合情况
-	
-	int i;
-
-	//for (i = 1; i <= 4; ++i) {
-	//	printf("x=%d, y=%d\n", deltaP[i].x, deltaP[i].y);
-	//}
-	
-	Queue que;			// 存搜索中的结点
-	initQue(&que);
-
-	pre[src.x][src.y] = -1;					// 制造根节点
-	pushQue(que, src);
-
-	for (; !isEmptyQue(que);) {				// 向下搜索
-		Point current = getBack(que);
-		for (i = 1; i <= DIRECTION_MODE; i++) {			// 不允许斜着走
-			Point next = addPnt(current, deltaP[i]);	// 下一步位置
-			if (IsAvailable(next)) {		// 能走
-				pushQue(que, next);			// 记录为叶子结点
-				pre[next.x][next.y] = i;	// 记录前驱
-				if (cmpPnt(next, dst)) {	// 判断是否已经到达目的地
-					return true;
-				}
+// 搜索路径，并记录结果
+int DFSpath(Point src, Point dst)
+{
+	// 参数：起点src，终点dst
+	// 返回值：是否找到了路径
+	// 初始化栈
+	Stack sta;
+	initSta(&sta);
+	// 初始化栈
+	pushSta(sta, src);
+	// 初始化访问数组
+	vis[src.x][src.y] = 1;
+	// 开始搜索
+	while (!isEmpty(sta)) {		// 栈不为空
+		Point cur = getTop(sta);	// 取栈顶元素
+		popSta(sta);				// 出栈
+		// 判断是否是终点
+		if (cur.x == dst.x && cur.y == dst.y) {
+			destroySta(sta);			// 释放资源
+			return true;
+		}
+		// 依次尝试所有的动作
+		int i;
+		for (i = 1; i <= DIRECTION_MODE; ++i) {		// 注意：这里从1开始，因为deltaP[0]是无效的
+			Point next = { cur.x + deltaP[i].x, cur.y + deltaP[i].y };		// 计算下一个点
+			// 判断是否可行
+			if (IsAvailable(next) && !vis[next.x][next.y]) {	// 可行且未被访问过
+				pushSta(sta, next);
+				vis[next.x][next.y] = 1;
+				pre[next.x][next.y] = i;
 			}
 		}
-		popQue(que);			// 父亲结点搜完了
 	}
-	return false;			// 全部搜一遍没搜到，说明无法到达
+	destroySta(sta);	// 释放资源
+	return false;		// 没有找到路径
+}
 
+// 打印地图
+void PrintMap(int m, int n) {
+	printf("\n");
+	int i, j;
+	for (i = 1; i <= m; ++i) {
+		for (j = 1; j <= n; ++j) {			// 墙体
+			if (mmap[i][j] == 2) {
+				printf("* ");
+			}
+			//else if (vis[i][j]) {
+			//	printf("+ ");
+			//}
+			else {
+				printf("%d ", mmap[i][j]);
+			}
+		}
+		printf("\n");
+	}
 }
 
 // 打印路径
@@ -207,7 +165,7 @@ void PrintPath(Point src, Point dst) {
 	Stack ans;
 	initSta(&ans);
 	Point it = dst;
-	for (; pre[it.x][it.y] != -1;) {	// 由于记录方式是前驱，故只能逆序遍历
+	for (; pre[it.x][it.y] != 0;) {	// 由于记录方式是前驱，故只能逆序遍历
 		pushSta(ans, it);				// 压栈
 		it = subtractPnt(it, deltaP[pre[it.x][it.y]]);
 	}
@@ -219,9 +177,11 @@ void PrintPath(Point src, Point dst) {
 		popSta(ans);
 		nxt = getTop(ans);
 		printf("(%d,%d,%d),", it.x, it.y, pre[nxt.x][nxt.y]);
-		pre[nxt.x][nxt.y] = -1;			// 标记路径途径点
+		mmap[nxt.x][nxt.y] = 2;			// 标记路径途径点
 	}
+	mmap[it.x][it.y] = 2;
 	printf("\n");
 
+	destroySta(ans);
 }
 

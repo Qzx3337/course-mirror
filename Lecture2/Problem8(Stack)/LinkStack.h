@@ -30,7 +30,7 @@ StackElemType getTop(Stack s);
 void initSta(Stack* s);
 int popSta(Stack s);
 void pushSta(Stack s, StackElemType data);
-
+void destroySta(Stack s);
 
 /******** 实现  **************/
 
@@ -78,3 +78,12 @@ inline void pushSta(Stack sta, StackElemType data) {
 
 	sta->size++;
 }
+
+// 释放资源
+inline void destroySta(Stack s)
+{
+    while (popSta(s)) {}
+	free(s->top);
+	free(s);
+}
+
