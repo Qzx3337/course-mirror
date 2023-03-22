@@ -17,6 +17,8 @@ language: C.
 #define QueueElemType int
 #endif // !QueueElemType
 
+#define mcreate(type, n) ((type)*)malloc((n)*sizeof((type)))
+#define mcreate(type) ((type)*)malloc(sizeof((type)))
 
 /*********************************************/
 // 队列结点类
@@ -47,14 +49,13 @@ int eraseNext(QueNode* pn) {
 }
 
 
-
 /***********************************************/
 // 链式队列类
 typedef struct QueueBody {
 	int size;
 	QueNode* front;
 	QueNode* back;
-} QueueBody, *Queue;
+} QueueBody, * Queue;
 
 // 只读操作接口
 
@@ -86,7 +87,7 @@ inline int popQue(Queue que) {
 	if (que->size == 0) return false;
 	eraseNext(que->back);
 	que->size--;
-	if (que->size == 0) que->front == que->back;
+	if (que->size == 0) que->front = que->back;
 	return true;
 }
 
@@ -100,5 +101,10 @@ inline int pushQue(Queue que, QueueElemType data) {
 	return true;
 }
 
-
+void freeQueue(Queue que) {
+	// 释放空间
+	while (popQue(que));
+	free(que->back);
+	free(que);
+}
 

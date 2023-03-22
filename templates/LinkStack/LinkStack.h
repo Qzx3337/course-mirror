@@ -1,8 +1,15 @@
+/*
+* @Description: 链式栈的接口
+*/
+
 #pragma once
 
 #include <stdlib.h>
 #define true 1
 #define false 0
+
+#define mcreate(type, n) ((type)*)malloc((n)*sizeof((type)))
+#define mcreate(type) ((type)*)malloc(sizeof((type)))
 
 #ifndef StackElemType
 #define StackElemType int
@@ -27,9 +34,9 @@ StackElemType getTop(Stack s);
 
 /******** 可写接口 ************/
 
-void initSta(Stack* s);
+int initSta(Stack* s);
 int popSta(Stack s);
-void pushSta(Stack s, StackElemType data);
+int pushSta(Stack s, StackElemType data);
 
 
 /******** 实现  **************/
@@ -47,11 +54,13 @@ StackElemType getTop(Stack s) {
 }
 
 // 初始化栈
-void initSta(Stack* sta) {
+int initSta(Stack* sta) {
 	(*sta) = (Stack)malloc(sizeof(LinkStackBody));
+	if (!(*sta)) return false;				// 分配失败
 	(*sta)->size = 0;
 	(*sta)->top = (LinkStackNode*)malloc(sizeof(LinkStackNode));
 	(*sta)->top->next = NULL;
+	return true;
 }
 
 // 出栈，成功返回 1 ，失败返回 0 
@@ -68,8 +77,9 @@ inline int popSta(Stack sta) {
 }
 
 // 压栈
-inline void pushSta(Stack sta, StackElemType data) {
+inline int pushSta(Stack sta, StackElemType data) {
 	LinkStackNode* newNode = (LinkStackNode*)malloc(sizeof(LinkStackNode));
+	if (!newNode) return false;			// 分配失败
 	newNode->data = data;
 
 	//InsertAsNext(sta->top, newNode);
@@ -77,4 +87,5 @@ inline void pushSta(Stack sta, StackElemType data) {
 	sta->top->next = newNode;
 
 	sta->size++;
+	return true;
 }

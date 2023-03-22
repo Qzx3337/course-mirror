@@ -17,6 +17,7 @@ language: C.
 #define QueueElemType int
 #endif // !QueueElemType
 
+#define create_mem(type, n) ((type)*)malloc((n)*sizeof((type)))
 
 /*********************************************/
 // 队列结点类
@@ -100,5 +101,10 @@ inline int pushQue(Queue que, QueueElemType data) {
 	return true;
 }
 
-
+void freeQueue(Queue que) {
+	// 释放空间
+	while (popQue(que));
+	free(que->back);
+	free(que);
+}
 
