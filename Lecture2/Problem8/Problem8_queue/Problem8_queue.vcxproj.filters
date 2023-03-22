@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="p8.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="LinkQueue.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
+    <ClInclude Include="LinkStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="LinkStack.h">
+    <ClInclude Include="p8.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,6 +35,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="p8.in" />
-    <None Include="README.md" />
   </ItemGroup>
 </Project>
