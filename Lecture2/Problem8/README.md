@@ -1,9 +1,9 @@
 
 # Problem 8 迷宫问题
 
-[校园TIC平台](https://itc.hzau.edu.cn/assignment/fileUploadList.jsp?proNum=2&courseID=6&assignID=4940&libCenter=false)
-
 [gitee](https://gitee.com/Qzx3337/data-structure-course/tree/master/Lecture2/Problem8)
+
+## [校园TIC平台](https://itc.hzau.edu.cn/assignment/fileUploadList.jsp?proNum=2&courseID=6&assignID=4940&libCenter=false)
 
 ### 【问题描述】
 以一个m*n的长方阵表示迷宫，0和1分别表示迷宫中的通路和障碍。设计一个程序，对任意设定的迷宫，求出一条从入口到出口的通路，或得出没有通路的结论。
