@@ -31,6 +31,7 @@
   <ItemGroup>
     <None Include="p8.in" />
     <None Include="p8.out" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="p8_stack.c">
