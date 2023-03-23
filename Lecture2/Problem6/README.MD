@@ -2,7 +2,7 @@
 # 6.银行排队问题
 
 代码：
-[Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
+[Code on gitee](https://gitee.com/Qzx3337/data-structure-course/tree/master/Lecture2/Problem6)
 
 # 【笔记】银行排队问题模拟
 

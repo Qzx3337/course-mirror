@@ -2,7 +2,7 @@
 # 中缀表达式转换为后缀表达式
 
 代码：
-[Code on gitee](https://gitee.com/Qzx3337/data-structure-course/tree/master/Lecture2/Problem4)
+[Code on gitee](https://gitee.com/Qzx3337/data-structure-course/tree/master/Lecture2/Problem5)
 
 ## 实现思路
 
