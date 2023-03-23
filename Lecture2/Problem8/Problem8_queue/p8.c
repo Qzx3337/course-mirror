@@ -1,8 +1,7 @@
 /**********************
 
 Problem 8: 迷宫问题
-
-Description: README.MD
+介绍: README.MD
 
 method: BFS实现
 
