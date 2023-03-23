@@ -26,5 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="p5.in" />
+    <None Include="README.MD" />
   </ItemGroup>
 </Project>
