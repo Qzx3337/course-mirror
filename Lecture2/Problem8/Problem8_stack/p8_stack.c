@@ -1,9 +1,9 @@
 /**********************
 
-Problem 8: ÃÔ¹¬ÎÊÌâ
+Problem 8: è¿·å®«é—®é¢˜
 Description: README.MD
 
-method: DFSÊµÏÖ
+method: DFSå®ç°
 
 language: C.
 
@@ -14,17 +14,17 @@ language: C.
 
 #include "p8_stack.h"
 
-#define DIRECTION_MODE 4	// ·½ÏòÄ£Ê½£º4±íÊ¾ËÄ·½ÏòÒÆ¶¯£¨Ö»ÄÜÉÏÏÂ×óÓÒ×ß£©£¬8±íÊ¾°Ë·½Ïò£¨¿ÉÒÔĞ±×Å×ß£©
+#define DIRECTION_MODE 4	// æ–¹å‘æ¨¡å¼ï¼š4è¡¨ç¤ºå››æ–¹å‘ç§»åŠ¨ï¼ˆåªèƒ½ä¸Šä¸‹å·¦å³èµ°ï¼‰ï¼Œ8è¡¨ç¤ºå…«æ–¹å‘ï¼ˆå¯ä»¥æ–œç€èµ°ï¼‰
 
-// È«¾Ö±äÁ¿
+// å…¨å±€å˜é‡
 
-int mmap[MAXM][MAXN];	// µØÍ¼
-int pre[MAXM][MAXN];	// ÓÃÓÚÑ°ÕÒÇ°Çı½áµã£¬Ò»¸öÊı×Ö´ú±í¶¯×÷
-int vis[MAXM][MAXN] = { 0 };// ·ÃÎÊÊı×é
-Point deltaP[9];		// ËùÓĞµÄ¶¯×÷¶ÔÓ¦µÄÎ»ÒÆ
+int mmap[MAXM][MAXN];	// åœ°å›¾
+int pre[MAXM][MAXN];	// ç”¨äºå¯»æ‰¾å‰é©±ç»“ç‚¹ï¼Œä¸€ä¸ªæ•°å­—ä»£è¡¨åŠ¨ä½œ
+int vis[MAXM][MAXN] = { 0 };// è®¿é—®æ•°ç»„
+Point deltaP[9];		// æ‰€æœ‰çš„åŠ¨ä½œå¯¹åº”çš„ä½ç§»
 
 
-// ·½·¨ÁĞ±í
+// æ–¹æ³•åˆ—è¡¨
 
 void InitMap(int m, int n);
 void PrintMap(int m, int n);
@@ -34,11 +34,11 @@ int DFSpath(Point src, Point dst);
 void PrintPath(Point src, Point dst);
 
 
-// Ö÷º¯Êı
+// ä¸»å‡½æ•°
 int main() {
 
-	freopen("p8.in", "r", stdin);		// ÎÄ¼ş¶ÁÈë
-	//freopen("p8.out", "w", stdout);		// ÎÄ¼şÊä³ö
+	freopen("p8.in", "r", stdin);		// æ–‡ä»¶è¯»å…¥
+	freopen("p8.out", "w", stdout);		// æ–‡ä»¶è¾“å‡º
 
 	int m, n;
 	scanf("%d%d", &m, &n);
@@ -50,11 +50,11 @@ int main() {
 
 	InitDelta();
 	
-	if (DFSpath(src, dst)) {		// ÕÒµ½ÁËÂ·¾¶
+	if (DFSpath(src, dst)) {		// æ‰¾åˆ°äº†è·¯å¾„
 		PrintPath(src, dst);
 		PrintMap(m, n);
 	}
-	else {							// Î´ÕÒµ½Â·¾¶
+	else {							// æœªæ‰¾åˆ°è·¯å¾„
 		printf("No Path!\n");
 	}
 
@@ -62,20 +62,20 @@ int main() {
 }
 
 
-/********* ·½·¨ÊµÏÖ *****************/
+/********* æ–¹æ³•å®ç° *****************/
 
 
-// ½¨ÔìµØÍ¼
+// å»ºé€ åœ°å›¾
 void InitMap(int m, int n) {
 	int i, j;
-	for (i = 0; i <= m + 1; ++i) {			// ÍâÎ§±ßÔµÎ§Ç½
+	for (i = 0; i <= m + 1; ++i) {			// å¤–å›´è¾¹ç¼˜å›´å¢™
 		mmap[i][0] = mmap[i][n + 1] = 1;
 	}
 	for (j = 0; j <= n + 1; ++j) {
 		mmap[0][j] = mmap[m + 1][j] = 1;
 	}
 
-	for (i = 1; i <= m; ++i) {				// Í¼ÄÚÎ§Ç½¶ÁÈë½øÀ´
+	for (i = 1; i <= m; ++i) {				// å›¾å†…å›´å¢™è¯»å…¥è¿›æ¥
 		for (j = 1; j <= n; ++j) {
 			scanf("%d", &mmap[i][j]);
 		}
@@ -83,69 +83,69 @@ void InitMap(int m, int n) {
 
 }
 
-// ¸÷¸ö¶¯×÷µÄÎ»ÒÆ
+// å„ä¸ªåŠ¨ä½œçš„ä½ç§»
 void InitDelta() {
-	deltaP[0] = (Point){ 0,0 };		// Ô­µØ²»¶¯
-	deltaP[1] = (Point){ 0,1 };		// ¶«
-	deltaP[2] = (Point){ 1,0 };		// ÄÏ
-	deltaP[3] = (Point){ 0,-1 };	// Î÷
-	deltaP[4] = (Point){ -1,0 };	// ±±
-	deltaP[5] = (Point){ 1,1 };		// ¶«ÄÏ
-	deltaP[6] = (Point){ 1,-1 };	// Î÷ÄÏ
-	deltaP[7] = (Point){ -1,1 };	// ¶«±±
-	deltaP[8] = (Point){ -1,-1 };	// Î÷±±
+	deltaP[0] = (Point){ 0,0 };		// åŸåœ°ä¸åŠ¨
+	deltaP[1] = (Point){ 0,1 };		// ä¸œ
+	deltaP[2] = (Point){ 1,0 };		// å—
+	deltaP[3] = (Point){ 0,-1 };	// è¥¿
+	deltaP[4] = (Point){ -1,0 };	// åŒ—
+	deltaP[5] = (Point){ 1,1 };		// ä¸œå—
+	deltaP[6] = (Point){ 1,-1 };	// è¥¿å—
+	deltaP[7] = (Point){ -1,1 };	// ä¸œåŒ—
+	deltaP[8] = (Point){ -1,-1 };	// è¥¿åŒ—
 }
 
-// ÅĞ¶ÏµãÊÇ·ñÄÜ×ß£º¸ÃµãÄÜ×ßÇÒÃ»ÓĞ×ß¹ı¡£
+// åˆ¤æ–­ç‚¹æ˜¯å¦èƒ½èµ°ï¼šè¯¥ç‚¹èƒ½èµ°ä¸”æ²¡æœ‰èµ°è¿‡ã€‚
 int IsAvailable(Point pnt) {
 	if (mmap[pnt.x][pnt.y]) return false;
 	if (pre[pnt.x][pnt.y]) return false;
 	return true;
 }
 
-// ËÑË÷Â·¾¶£¬²¢¼ÇÂ¼½á¹û
+// æœç´¢è·¯å¾„ï¼Œå¹¶è®°å½•ç»“æœ
 int DFSpath(Point src, Point dst)
 {
-	// ²ÎÊı£ºÆğµãsrc£¬ÖÕµãdst
-	// ·µ»ØÖµ£ºÊÇ·ñÕÒµ½ÁËÂ·¾¶
-	// ³õÊ¼»¯Õ»
+	// å‚æ•°ï¼šèµ·ç‚¹srcï¼Œç»ˆç‚¹dst
+	// è¿”å›å€¼ï¼šæ˜¯å¦æ‰¾åˆ°äº†è·¯å¾„
+	// åˆå§‹åŒ–æ ˆ
 	Stack sta;
 	initSta(&sta);
-	// ³õÊ¼»¯Õ»
+	// åˆå§‹åŒ–æ ˆ
 	pushSta(sta, src);
-	// ³õÊ¼»¯·ÃÎÊÊı×é
+	// åˆå§‹åŒ–è®¿é—®æ•°ç»„
 	vis[src.x][src.y] = 1;
-	// ¿ªÊ¼ËÑË÷
-	while (!isEmpty(sta)) {		// Õ»²»Îª¿Õ
-		Point cur = getTop(sta);	// È¡Õ»¶¥ÔªËØ
-		popSta(sta);				// ³öÕ»
-		// ÅĞ¶ÏÊÇ·ñÊÇÖÕµã
+	// å¼€å§‹æœç´¢
+	while (!isEmpty(sta)) {		// æ ˆä¸ä¸ºç©º
+		Point cur = getTop(sta);	// å–æ ˆé¡¶å…ƒç´ 
+		popSta(sta);				// å‡ºæ ˆ
+		// åˆ¤æ–­æ˜¯å¦æ˜¯ç»ˆç‚¹
 		if (cur.x == dst.x && cur.y == dst.y) {
-			destroySta(sta);			// ÊÍ·Å×ÊÔ´
+			destroySta(sta);			// é‡Šæ”¾èµ„æº
 			return true;
 		}
-		// ÒÀ´Î³¢ÊÔËùÓĞµÄ¶¯×÷
+		// ä¾æ¬¡å°è¯•æ‰€æœ‰çš„åŠ¨ä½œ
 		int i;
-		for (i = 1; i <= DIRECTION_MODE; ++i) {		// ×¢Òâ£ºÕâÀï´Ó1¿ªÊ¼£¬ÒòÎªdeltaP[0]ÊÇÎŞĞ§µÄ
-			Point next = { cur.x + deltaP[i].x, cur.y + deltaP[i].y };		// ¼ÆËãÏÂÒ»¸öµã
-			// ÅĞ¶ÏÊÇ·ñ¿ÉĞĞ
-			if (IsAvailable(next) && !vis[next.x][next.y]) {	// ¿ÉĞĞÇÒÎ´±»·ÃÎÊ¹ı
+		for (i = 1; i <= DIRECTION_MODE; ++i) {		// æ³¨æ„ï¼šè¿™é‡Œä»1å¼€å§‹ï¼Œå› ä¸ºdeltaP[0]æ˜¯æ— æ•ˆçš„
+			Point next = { cur.x + deltaP[i].x, cur.y + deltaP[i].y };		// è®¡ç®—ä¸‹ä¸€ä¸ªç‚¹
+			// åˆ¤æ–­æ˜¯å¦å¯è¡Œ
+			if (IsAvailable(next) && !vis[next.x][next.y]) {	// å¯è¡Œä¸”æœªè¢«è®¿é—®è¿‡
 				pushSta(sta, next);
 				vis[next.x][next.y] = 1;
 				pre[next.x][next.y] = i;
 			}
 		}
 	}
-	destroySta(sta);	// ÊÍ·Å×ÊÔ´
-	return false;		// Ã»ÓĞÕÒµ½Â·¾¶
+	destroySta(sta);	// é‡Šæ”¾èµ„æº
+	return false;		// æ²¡æœ‰æ‰¾åˆ°è·¯å¾„
 }
 
-// ´òÓ¡µØÍ¼
+// æ‰“å°åœ°å›¾
 void PrintMap(int m, int n) {
 	printf("\n");
 	int i, j;
 	for (i = 1; i <= m; ++i) {
-		for (j = 1; j <= n; ++j) {			// Ç½Ìå
+		for (j = 1; j <= n; ++j) {			// å¢™ä½“
 			if (mmap[i][j] == 2) {
 				printf("* ");
 			}
@@ -160,25 +160,25 @@ void PrintMap(int m, int n) {
 	}
 }
 
-// ´òÓ¡Â·¾¶
+// æ‰“å°è·¯å¾„
 void PrintPath(Point src, Point dst) {
 
 	Stack ans;
 	initSta(&ans);
 	Point it = dst;
-	for (; pre[it.x][it.y] != 0;) {	// ÓÉÓÚ¼ÇÂ¼·½Ê½ÊÇÇ°Çı£¬¹ÊÖ»ÄÜÄæĞò±éÀú
-		pushSta(ans, it);				// Ñ¹Õ»
+	for (; pre[it.x][it.y] != 0;) {	// ç”±äºè®°å½•æ–¹å¼æ˜¯å‰é©±ï¼Œæ•…åªèƒ½é€†åºéå†
+		pushSta(ans, it);				// å‹æ ˆ
 		it = subtractPnt(it, deltaP[pre[it.x][it.y]]);
 	}
 	pushSta(ans, it);
 
 	Point nxt;
-	for (; getStaSize(ans) > 1;) {		// ³öÕ»Ë³ĞòÎªÕıĞò
+	for (; getStaSize(ans) > 1;) {		// å‡ºæ ˆé¡ºåºä¸ºæ­£åº
 		it = getTop(ans);
 		popSta(ans);
 		nxt = getTop(ans);
 		printf("(%d,%d,%d),", it.x, it.y, pre[nxt.x][nxt.y]);
-		mmap[nxt.x][nxt.y] = 2;			// ±ê¼ÇÂ·¾¶Í¾¾¶µã
+		mmap[nxt.x][nxt.y] = 2;			// æ ‡è®°è·¯å¾„é€”å¾„ç‚¹
 	}
 	mmap[it.x][it.y] = 2;
 	printf("\n");
