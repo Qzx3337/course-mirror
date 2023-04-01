@@ -1,5 +1,7 @@
 /*******************
 * 
+* 交叉链表矩阵模板
+* 
 * language: C.
 * 
 **********************/
@@ -22,7 +24,7 @@ int main() {
 
 	XLLMatPtr mat3 = addXLLMat(mat1, mat2);	// 矩阵相加
 	
-	if (mat3) printXLLMat(mat3);			// 输出矩阵
+	if (mat3->len) printXLLMat(mat3);		// 输出矩阵
 	else printf("-1 -1 -1\n");
 
 	destoryXLLMat(mat1);					// 释放矩阵

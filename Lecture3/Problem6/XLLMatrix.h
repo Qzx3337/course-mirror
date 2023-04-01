@@ -1,10 +1,19 @@
+/*
+* 交叉链表矩阵模板类
+* 
+* Cross Link List Matrix Template Class
+* Class: XLLMat
+* 
+* language:C.
+*/
+
 #pragma once
 
 #ifndef ElemType
 #define ElemType int
 #endif // !ElemType
 
-// cross link node, cross link list
+// cross link list
 typedef struct _XLNode{
 	int row;
 	int col;
@@ -22,35 +31,37 @@ typedef struct _XLLMat {
 	XLList* colHead;
 } XLLMat, *XLLMatPtr;
 
-// *************** interface ***************
+// ******** interface ********
 
 XLLMatPtr createXLLMat(int rows, int cols);			// create a matrix
-
 void destoryXLLMat(XLLMatPtr mat);					// destory a matrx
-
-bool insertXLLMat(XLLMatPtr mat, int x, int y, ElemType v);		// insert a node
-
+bool insertXLLMat(XLLMatPtr mat, int x, int y, ElemType v);				// insert a node
 bool eraseXLLMat(XLLMatPtr mat, int x, int y);		// erase a node
-
 XLLMatPtr addXLLMat(XLLMatPtr const mat1, XLLMatPtr const mat2);		// add two matrix
-
 bool readXLLMat(XLLMatPtr mat, int const len);		// read a matrix from keybord
-
 bool printXLLMat(XLLMatPtr const mat);				// print a matrix
 
-// *************** implementation  ***************
+// ******** implementation  ********
 
-XLLMatPtr createXLLMat(int rows, int cols)			// create a matrix
+// create a matrix
+XLLMatPtr createXLLMat(int rows, int cols)
 {
-	XLLMatPtr mat = mnew(XLLMat);
+	XLLMatPtr mat = mnew(XLLMat);			// create a matrix
 	if (!mat) exit(OVERFLOW);
 	mat->rows = rows;
 	mat->cols = cols;
 	mat->len = 0;
-	if (!(mat->rowHead = mnewarr(XLList, rows))) exit(OVERFLOW);
-	if (!(mat->colHead = mnewarr(XLList, cols))) exit(OVERFLOW);
-	memset(mat->rowHead, 0, sizeof(XLList)*rows);				// set all pointer to NULL
-	memset(mat->colHead, 0, sizeof(XLList)*cols);
+	if (!(mat->rowHead = mnewarr(XLList, rows+1))) exit(OVERFLOW);	// create rowHead and colHead arr
+	if (!(mat->colHead = mnewarr(XLList, cols+1))) exit(OVERFLOW);
+	int i;
+	for (i = 0; i < rows; i++){				// create rowHead and colHead node
+		makeNew(mat->rowHead[i], XLNode);
+		mat->rowHead[i]->right = NULL;
+	}
+	for (i = 0; i < cols; i++) {
+		makeNew(mat->colHead[i], XLNode);
+		mat->colHead[i]->down = NULL;
+	}
 	return mat;
 }
 
@@ -75,11 +86,11 @@ void destoryXLLMat(XLLMatPtr mat)
 // insert a node
 bool insertXLLMat(XLLMatPtr mat, int x, int y, ElemType v)		
 {
-	if (x<0 || x>mat->rows - 1 || y<0 || y>mat->cols - 1) {		// check input
+	if (x<1 || x>mat->rows || y<1 || y>mat->cols) {		// check input
 		printf("error input\n");
 		return false;
 	}
-	if (v == 0) {
+	if (v == 0) {							// if (v == 0) erase the node
 		eraseXLLMat(mat, x, y);
 		return true;
 	}
@@ -90,43 +101,22 @@ bool insertXLLMat(XLLMatPtr mat, int x, int y, ElemType v)
 	p->col = y;
 	p->value = v;
 
-	if (!mat->rowHead[x]) {			// insert to rowHead
-		p->right = NULL;
-		mat->rowHead[x] = p;
-	}
-	else {
-		XLList q = mat->rowHead[x];
-		while (q->right!=NULL && q->right->col < y) q = q->right;
-		if (q->right != NULL) {
-			if (q->right->col == y) {	// the node already exist 
-				free(p); p = NULL;
-				if(v==0)
-				{
-					// ************************************
-					//eraseNextXLNode()
-					//q->right = q->right->right;
-				}
-				else q->right->value = v;
-			}
-		}
-		if (p) {
-			p->right = q->right;
-			q->right = p;
-		}
+	XLList q = mat->rowHead[x];
+	while (q->right!=NULL && q->right->col < y) q = q->right;
+
+	if (q->right != NULL) if (q->right->col == y) {	// the node already exist 
+		free(p); p = NULL;
+		q->right->value = v;
+		return true;
 	}
 
-	if (p) {					// insert to colHead
-		if (!mat->colHead[y]) {
-			p->down = NULL;
-			mat->colHead[y] = p;
-		}
-		else {
-			XLList q = mat->colHead[y];
-			while (q->down && q->down->row < x) q = q->down;
-			p->down = q->down;
-			q->down = p;
-		}
-	}
+	p->right = q->right;			// insert in row
+	q->right = p;
+
+	q = mat->colHead[y];
+	while (q->down && q->down->row < x) q = q->down;
+	p->down = q->down;				// insert in col
+	q->down = p;
 
 	mat->len++;
 	return true;
@@ -135,41 +125,23 @@ bool insertXLLMat(XLLMatPtr mat, int x, int y, ElemType v)
 // erase a node
 bool eraseXLLMat(XLLMatPtr mat, int x, int y)
 {
-	if (x<0 || x>mat->rows - 1 || y<0 || y>mat->cols - 1) {		// check input
-			printf("error input\n");
-			return false;
-		}
+    if (x<1 || x>mat->rows || y<1 || y>mat->cols) {		// check input
+		printf("error input\n");
+		return false;
+	}
+	if (mat->len == 0) return false;					// no node in matrix
+
 	XLList p = mat->rowHead[x];
+	while (p->right && p->right->col < y) p = p->right;				// find the node in row
+	if (p->right == NULL || p->right->col > y) return false;		// the node not exist
 	XLList q = mat->colHead[y];
-	if (!p || !q) return false;
-	if (p->col == y) {			// erase from rowHead
-			mat->rowHead[x] = p->right;
-			free(p);
-			p = NULL;
-		}
-	else {
-		while (p->right && p->right->col < y) p = p->right;
-		if (p->right && p->right->col == y) {
-			XLList q = p->right;
-			p->right = q->right;
-			free(q);
-			q = NULL;
-		}
-	}
-	if (q->row == x) {			// erase from colHead
-			mat->colHead[y] = q->down;
-			free(q);
-			q = NULL;
-		}
-	else {
-		while (q->down && q->down->row < x) q = q->down;
-		if (q->down && q->down->row == x) {
-			XLList p = q->down;
-			q->down = p->down;
-			free(p);
-			p = NULL;
-		}
-	}
+	while (q->down && q->down->row < x) q = q->down;				// find the node in col
+
+	XLList r = p->right;				// erase the node
+	p->right = r->right;
+	p->down = r->down;
+	free(r); r = NULL;
+
 	mat->len--;
 	return true;
 }
@@ -187,8 +159,8 @@ XLLMatPtr addXLLMat(XLLMatPtr const mat1, XLLMatPtr const mat2)
     if (!mat) exit(OVERFLOW);
 	int i;
 	for (i = 0; i < mat1->rows; i++) {		// add row by row
-		XLList p = mat1->rowHead[i];
-		XLList q = mat2->rowHead[i];
+		XLList p = mat1->rowHead[i]->right;
+		XLList q = mat2->rowHead[i]->right;
 		while (p && q) {					// add two node
 			if (p->col == q->col) {
 				insertXLLMat(mat, i, p->col, p->value + q->value);
@@ -220,10 +192,10 @@ XLLMatPtr addXLLMat(XLLMatPtr const mat1, XLLMatPtr const mat2)
 // read a matrix from keybord
 bool readXLLMat(XLLMatPtr mat, int const len)
 {
-	if (!mat) return false;
+	if (!mat) return false;				// check input
 	int i;
 	int x, y, v;
-	for (i = 0; i < len; i++) {
+	for (i = 0; i < len; i++) {			// read nodes
 		scanf("%d%d%d", &x, &y, &v);
 		insertXLLMat(mat, x, y, v);
 	}
@@ -236,7 +208,7 @@ bool printXLLMat(XLLMatPtr const mat)
 	if (!mat) return false;
 	int i;
 	for (i = 0; i < mat->rows; i++) {
-		XLList p = mat->rowHead[i];
+		XLList p = mat->rowHead[i]->right;
 		while (p) {
 			//printf("(%d,%d,%d) ", p->row, p->col, p->value);
 			printf("%d %d %d\n", p->row, p->col, p->value);
@@ -246,8 +218,6 @@ bool printXLLMat(XLLMatPtr const mat)
 	printf("\n");
 	return true;
 }
-
-
 
 
 
