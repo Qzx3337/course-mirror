@@ -1,7 +1,8 @@
 /*******************
 * 
-* language: C.
+* 2 数组的循环左移
 * 
+* language: C.
 **********************/
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "p2.h"

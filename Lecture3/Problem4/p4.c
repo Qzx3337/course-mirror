@@ -25,7 +25,7 @@ int main() {
 	//}
 
 	int x=0, y=0, cnt=0;
-	for (i = n - 1; i > 0; i-=2) {
+	for (i = n - 1; i > 0; i -= 2) {
 		for (j = 0; j < 4; j++) {
 			for (k = 0; k < i; k++) {
 				a[x][y] = ++cnt;
@@ -35,7 +35,7 @@ int main() {
 		}
 		x++, y++;
 	}
-	if (n % 2) a[x][y] = ++cnt;
+	if (n & 1) a[x][y] = ++cnt;
 
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {

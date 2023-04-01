@@ -1,3 +1,9 @@
+/*
+*  3.1 利用三元组完成矩阵加法
+* 
+* language: C.
+*/
+
 #include "p1.h"
 
 int main() {
