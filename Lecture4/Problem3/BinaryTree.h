@@ -31,6 +31,7 @@ typedef struct _BinTree
 // 二叉树结点接口
 
 BinTreeNode newBinTreeNode(DataType data);
+void destoryBinTreeNode(BinTreeNode root);
 void travPreNode(BinTreeNode root, void (*visit) (BinTreeNode));
 void travInNode(BinTreeNode root, void (*visit) (BinTreeNode));
 void travPostNode(BinTreeNode root, void (*visit) (BinTreeNode));
@@ -40,6 +41,7 @@ int getTreeDepthNode(BinTreeNode root);
 // 二叉树接口
 
 BinTree newBinTree();
+void destoryBinTree(BinTree tree);
 void travPre(BinTree tree, void (*visit) (BinTreeNode));
 void travIn(BinTree tree, void (*visit) (BinTreeNode));
 void travPost(BinTree tree, void (*visit) (BinTreeNode));
@@ -58,6 +60,15 @@ BinTreeNode newBinTreeNode(DataType data)
 	node->right = NULL;
 	node->data = data;
 	return node;
+}
+
+inline void destoryBinTreeNode(BinTreeNode root)
+{
+	if (root != NULL) {
+		destoryBinTreeNode(root->left);
+		destoryBinTreeNode(root->right);
+		free(root);
+	}
 }
 
 // 前序遍历结点
@@ -143,6 +154,14 @@ BinTree newBinTree()
 	if (tree == NULL) exit(OVERFLOW);
 	tree->root = NULL;
 	return tree;
+}
+
+inline void destoryBinTree(BinTree tree)
+{
+	if (tree->root != NULL) {
+		destoryBinTreeNode(tree->root);
+	}
+	free(tree);
 }
 
 // 前序遍历
