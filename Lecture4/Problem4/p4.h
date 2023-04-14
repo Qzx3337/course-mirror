@@ -58,19 +58,22 @@ void printTreeNode(BinTreeNode const node)
 #include "LinkStack.h"
 
 /* 使用栈中序遍历二叉树 */
-void travIn_Sta(BinTree tree, void (*visit)(BinTreeNode const node))
+void travIn_Sta(BinTree tree, void (*visit)(BinTreeNode node))
 {
-	Stack stack = newLinkStack();
-	BinTreeNode* itNode = &(tree->root);
-	while (itNode != NULL || !isLinkStackEmpty(stack)) {
+	Stack stack = newStack();
+	BinTreeNode itNode = tree->root;
+	while (itNode != NULL || !isStaEmpty(stack)) {
 		while (itNode != NULL) {
-			pushLinkStack(stack, itNode);
-			itNode = &((*itNode)->left);
+			pushSta(stack, itNode);
+			itNode = itNode->left;
 		}
-		if (!isLinkStackEmpty(stack)) {
-			itNode = popLinkStack(stack);
-			visit(**itNode);
-			itNode = &((*itNode)->right);
+		if (!isStaEmpty(stack)) {
+			itNode = getStaTop(stack);
+			popSta(stack);
+			visit(itNode);
+			itNode = itNode->right;
 		}
 	}
+	destoryBinTreeNode(itNode);
 }
+

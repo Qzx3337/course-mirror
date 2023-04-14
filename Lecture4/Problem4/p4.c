@@ -9,7 +9,7 @@ language: C.
 
 int main() {
 
-	freopen("p4.in", "r", stdin);
+	//freopen("p4.in", "r", stdin);
 	//freopen("p4.out", "w", stdout);
 
 	char posSeq[MAXLEN];
@@ -23,10 +23,10 @@ int main() {
 	//printf("\n");
 	//travPost(tree, printTreeNode);
 	//printf("\n");
-	travLevel(tree, printTreeNode);
+	//travLevel(tree, printTreeNode);
+	//printf("\n");
+	travIn_Sta(tree, printTreeNode);
 	printf("\n");
-
-
 
 	destoryBinTree(tree);
 
