@@ -1,7 +1,8 @@
 
 # 数据结构课程作业
 
-[Code on github](https://github.com/Qzx3337/data-structure-course)
+代码在这里
+[Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
 
 在这里记一下做题历程
 
@@ -29,11 +30,37 @@
     - ```problem 6``` 银行排队问题
     - ```problem 7``` 停车场管理问题
     - ```problem 8``` 迷宫问题
+      
+      深搜实现 + 广搜实现：
+      ```LinkStack.h``` 栈模板，
+      ```LinkQueue.h``` 队列模板
+
     - ```practice 1``` 算术表达式求值 [Beta版] （增加了许多新特性）
 
-  - ```Lectuer 3``` ?
+  - ```Lectuer 3``` 广义表
+    - ```problem 1``` 利用三元组完成矩阵加法
+      
+      三元组矩阵模板
+
+    - ```problem 2``` 数组的循环左移
+      
+      经典题
+
+    - ```problem 3``` 求矩阵鞍点
+    - ```problem 4``` 产生n阶螺旋（顺时针）数字矩阵
+    - ```problem 5``` 求广义表原子元素数据域之和
+      
+      广义表模板
+
+    - ```problem 6``` 利用十字链表完成稀疏矩阵加法
+      
+      十字链表模板
+
+    - ```problem 7``` 文本文件中单词的检索
 
 
   
 已经不使用
-[Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
+
+[Code on github](https://github.com/Qzx3337/data-structure-course)
+

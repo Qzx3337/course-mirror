@@ -1,3 +1,4 @@
+#pragma once
 /**************
 
 链式队列类，提供基本操作接口。
@@ -53,7 +54,7 @@ typedef struct _Queue {
 	int size;
 	QueNode* front;
 	QueNode* back;
-}_Queue, *Queue;
+}_Queue, * Queue;
 
 // 只读操作接口
 
@@ -75,7 +76,7 @@ Queue newQueue() {
 	Queue que = (Queue)malloc(sizeof(_Queue));
 	if (!que) exit(OVERFLOW);
 	que->size = 0;
-	que->front = (QueNode*)malloc(sizeof(QueNode));	
+	que->front = (QueNode*)malloc(sizeof(QueNode));
 	if (!que->front) exit(OVERFLOW);
 	que->front->next = NULL;
 	que->back = que->front;

@@ -17,8 +17,6 @@ language: C.
 #define QueueElemType int
 #endif // !QueueElemType
 
-#define create_mem(type, n) ((type)*)malloc((n)*sizeof((type)))
-
 /*********************************************/
 // 队列结点类
 typedef struct QueNode {
@@ -63,7 +61,6 @@ int getQueSize(Queue const que) { return que->size; }
 QueueElemType getBack(Queue const que) { return que->back->next->data; }
 int isEmptyQue(Queue const que) { return que->size == 0; }
 QueueElemType getFront(Queue const que) { return que->front->data; }
-
 
 // 可写操作接口
 

@@ -1,21 +1,26 @@
-
-
-
-
 #define _CRT_SECURE_NO_WARNINGS 1
 
-#include "LinkQueue.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <assert.h>
+#define mnew(typeName) (typeName*)malloc(sizeof(typeName))
+#define mnewarr(typeName, size) (typeName*)malloc(sizeof(typeName)*(size))
+#define INF 0x7FFFFFFF
+
+#include "LinkQueue.h"
 
 void printQueInfo(Queue que);
 
 int main() {
 
 
-	Queue que;
-	initQue(&que);
+	Queue que = newQueue();
 
-	int x, y;
+	int x;
 	for (;;) {
 		scanf("%d", &x);
 		if (x == 0) {
@@ -40,3 +45,4 @@ void printQueInfo(Queue que) {
 	}
 	printf("-front\n");
 }
+
