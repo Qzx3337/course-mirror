@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BinaryTree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="LinkQueue.h">
       <Filter>头文件</Filter>
     </ClInclude>
