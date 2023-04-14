@@ -38,7 +38,7 @@ void pushSta(Stack sta, StackElemType const data);
 
 /******** ÊµÏÖ  **************/
 
-bool isEmpty(Stack s)
+inline bool isEmpty(Stack s)
 {
 	return s->size == 0;
 }
@@ -48,7 +48,7 @@ inline int getStaSize(Stack s)
 	return s->size;
 }
 
-StackElemType getTop(Stack s)
+inline StackElemType getTop(Stack s)
 {
 	return s->top->next->data;
 }

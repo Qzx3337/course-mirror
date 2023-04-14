@@ -7,11 +7,10 @@
 
 int main() {
 
-	int a, m;			// 十进制的 a，换成 m进制
+	int a, m;			// 十进制的 a，转换成 m进制
 	scanf("%d%d", &a, &m);
 
-	Stack s;			// 定义栈
-	initSta(&s);		// 初始化栈
+	Stack s = newStack();
 
 	while (a) {			// 按位取值，存入栈中
 		pushSta(s, a % m);
