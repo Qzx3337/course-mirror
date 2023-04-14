@@ -19,9 +19,9 @@ int main() {
 
 	// if (m == 2 && GetTop(&s) == 1) printf("0");
 
-	while (!isEmpty(s)) {
+	while (!isStaEmpty(s)) {
 		// °´ÕÕ³öÕ»Ë³ÐòÊä³ö
-		printf("_%d", getTop(s));
+		printf("_%d", getStaTop(s));
 		popSta(s);
 	}
 
