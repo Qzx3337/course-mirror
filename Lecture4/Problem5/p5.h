@@ -51,6 +51,7 @@ BinTree createBinTree_Pre(char* const arrData)
 /* 打印结点内容 */
 void printTreeNode(BinTreeNode const node)
 {
+	assert(node != NULL);
 	printf("%c", node->data);
 }
 
@@ -68,3 +69,16 @@ void swapChilds(BinTreeNode node)
 		node->right = temp;
 	}
 }
+
+void printLeaves(BinTreeNode const node)
+{
+	if (node == NULL) {
+		printf("#");
+	}
+	else {
+		printLeaves(node->left);
+		printLeaves(node->right);
+		printf("%c", node->data);
+	}
+}
+
