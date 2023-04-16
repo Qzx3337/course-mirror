@@ -32,6 +32,7 @@ StackElemType getStaTop(Stack const s);
 /******** 可写接口 ************/
 
 Stack newStack();
+void destoryStack(Stack sta);
 bool popSta(Stack sta);
 void pushSta(Stack sta, StackElemType const data);
 
@@ -63,6 +64,16 @@ Stack newStack()
 	if (sta->top == NULL) exit(OVERFLOW);
 	sta->top->next = NULL;
 	return sta;
+}
+
+inline void destoryStack(Stack sta)
+{
+	if(sta==NULL) return;
+	while (sta->size > 0) {
+		popSta(sta);
+	}
+	free(sta->top);
+	free(sta);
 }
 
 // 出栈，成功返回 1 ，失败返回 0 

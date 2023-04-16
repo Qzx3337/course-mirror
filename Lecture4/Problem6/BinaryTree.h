@@ -93,7 +93,6 @@ inline void travInNode(BinTreeNode root, void(*visit)(BinTreeNode))
 	}
 }
 
-
 // 后序遍历结点
 inline void travPostNode(BinTreeNode root, void (*visit) (BinTreeNode)) {
     if (root != NULL)
@@ -142,7 +141,6 @@ inline int getTreeDepthNode(BinTreeNode root) // che
 		return (max + 1);
 	}
 }
-
 
 // 二叉树接口实现
 
