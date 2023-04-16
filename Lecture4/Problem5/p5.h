@@ -54,5 +54,17 @@ void printTreeNode(BinTreeNode const node)
 	printf("%c", node->data);
 }
 
-
-
+/* 交换结点的左右子树 */
+void swapChilds(BinTreeNode node)
+{
+	assert(node != NULL);
+	if (node->left == NULL && node->right == NULL) {
+		extern int g_treeNodeCount;
+		g_treeNodeCount++;
+	}
+	else {
+		BinTreeNode temp = node->left;
+		node->left = node->right;
+		node->right = temp;
+	}
+}

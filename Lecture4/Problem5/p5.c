@@ -6,6 +6,7 @@ language: C.
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "p5.h"
 #define MAXLEN 128
+int g_treeNodeCount;
 
 int main() {
 
@@ -25,6 +26,14 @@ int main() {
 	//printf("\n");
 	//travLevel(tree, printTreeNode);
 	//printf("\n");
+
+	g_treeNodeCount = 0;
+	travPost(tree, swapChilds);
+
+	printf("%d\n", g_treeNodeCount);
+
+	travPost(tree, printTreeNode);
+	printf("\n");
 
 	destoryBinTree(tree);
 
