@@ -25,6 +25,8 @@ int main() {
 		popSta(s);
 	}
 
+	destoryStack(s);
+
 	return 0;
 }
 
