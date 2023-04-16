@@ -2,7 +2,12 @@
 # 数据结构课程作业
 
 代码在这里
+
+更新及时的：
 [Code on gitee](https://gitee.com/Qzx3337/data-structure-course)
+
+下载方便的：
+[Code on github](https://github.com/Qzx3337/course-mirror)
 
 在这里记一下做题历程
 
@@ -58,9 +63,57 @@
 
     - ```problem 7``` 文本文件中单词的检索
 
+    
+  - ```Lectuer 4``` 二叉树
+    -  ```problem 1``` 二叉树的递归遍历
+    -  ```problem 2``` 二叉树的高度
+    -  ```problem 3``` 扩展后续遍历及树形输出
+    -  ```problem 4``` 中序遍历二叉树的非递归实现
+    -  ```problem 5``` 二叉树左右子树交换操作
+    -  ```problem 6``` 二叉链表中的两个节点的最近共同祖先
+    -  ```problem 7``` 层次遍历二叉树
 
-  
-已经不使用
 
-[Code on github](https://github.com/Qzx3337/data-structure-course)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
