@@ -102,7 +102,7 @@ void myDFS(BinTreeNode const root, Stack sta, char const ch, bool* flag)
 	pushSta(sta, root);				// 保护现场
 	myDFS(root->left, sta, ch, flag);
 	myDFS(root->right, sta, ch, flag);
-	if (!(*flag)) popSta(sta);		// 如果没有找到目标结点，回复现场
+	if (!(*flag)) popSta(sta);		// 如果没有找到目标结点，恢复现场
 }
 
 /*
