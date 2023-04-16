@@ -68,6 +68,7 @@ Stack newStack()
 
 inline void destoryStack(Stack sta)
 {
+	if (sta == NULL) return;
 	while (sta->size > 0) {
 		popSta(sta);
 	}
