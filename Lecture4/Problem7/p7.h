@@ -18,7 +18,7 @@ language: C.
 #include "BinaryTree.h"
 
 void printTreeNode(BinTreeNode const node);
-void createBinTreeNode_Pre(BinTreeNode* parent, char** pData);
+void createBinTreeNode_Pre(BinTreeNode* father, char** pData);
 BinTree createBinTree_Pre(char* const arrData);
 
 
@@ -31,22 +31,23 @@ void printTreeNode(BinTreeNode const node)
 
 
 /* 从带扩展的先序遍历序列创建二叉树（内部函数，针对结点递归）。数据为单个字母，'.'表示树末 */
-void createBinTreeNode_Pre(BinTreeNode* parent, char** pData)
+void createBinTreeNode_Pre(BinTreeNode* father, char** pData)
 {
-	assert(parent != NULL && pData != NULL);
+	assert(father != NULL && pData != NULL);
 
 	if ((**pData) == '.') {
 		(*pData)++;
 	}
 	else if (isalpha(**pData)) {
 		//printf("%c", **pData);
-		(*parent) = newBinTreeNode(**pData);
+		(*father) = newBinTreeNode(**pData);
 		(*pData)++;
-		createBinTreeNode_Pre(&(*parent)->left, pData);
-		createBinTreeNode_Pre(&(*parent)->right, pData);
+		createBinTreeNode_Pre(&(*father)->left, pData);
+		createBinTreeNode_Pre(&(*father)->right, pData);
 	}
 	else {
-		assert(false);	// 非法字符
+		//assert(false);	// 非法字符
+		exit(1);
 	}
 }
 
