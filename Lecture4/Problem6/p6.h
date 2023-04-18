@@ -40,7 +40,7 @@ char* g_indexIn[128];			// 中序遍历序列中每个结点的位置
 
 BinTreeNode makeNodeFromPreIn(char** ppData, char* const secLeft, char* const secRight);
 BinTree makeTreeFromPreIn(char* const preSec, char* const inSec);
-void myDFS(BinTreeNode const root, Stack sta, char ch, bool* flag);
+//void myDFS(BinTreeNode const root, Stack sta, char ch, bool* flag);
 Stack getPath(BinTree const tree, char const ch);
 bool getLCA(BinTree const tree, char const ch1, char const ch2, char* ch3);
 void viewSta(Stack sta);
@@ -90,20 +90,20 @@ BinTree makeTreeFromPreIn(char* const preSec, char* const inSec)
 root: 根结点；sta: 存储根到结点的路径；ch: 目标结点数据；flag: 标记是否找到了结点；
 返回：void。
 */
-void myDFS(BinTreeNode const root, Stack sta, char const ch, bool* flag)
-{
-	if (*flag) return;				// 已经找到了结点，不再继续搜索
-	if (root == NULL) return;		// 空结点，不再继续搜索
-	if (root->data == ch) {			// 找到了目标结点
-		pushSta(sta, root);			// 将目标结点入栈
-		*flag = true;				// 标记已经找到了结点
-		return;
-	}
-	pushSta(sta, root);				// 保护现场
-	myDFS(root->left, sta, ch, flag);
-	myDFS(root->right, sta, ch, flag);
-	if (!(*flag)) popSta(sta);		// 如果没有找到目标结点，恢复现场
-}
+//void myDFS(BinTreeNode const root, Stack sta, char const ch, bool* flag)
+//{
+//	if (*flag) return;				// 已经找到了结点，不再继续搜索
+//	if (root == NULL) return;		// 空结点，不再继续搜索
+//	if (root->data == ch) {			// 找到了目标结点
+//		pushSta(sta, root);			// 将目标结点入栈
+//		*flag = true;				// 标记已经找到了结点
+//		return;
+//	}
+//	pushSta(sta, root);				// 保护现场
+//	myDFS(root->left, sta, ch, flag);
+//	myDFS(root->right, sta, ch, flag);
+//	if (!(*flag)) popSta(sta);		// 如果没有找到目标结点，恢复现场
+//}
 
 /*
 获取根到结点的路径，存入栈中。
@@ -112,23 +112,51 @@ tree: 二叉树；ch: 目标结点数据；
 */
 Stack getPath(BinTree const tree, char const ch)
 {
-	Stack sta = newStack();			// 存储根到结点的路径
-	bool flag = false;				// 标记是否找到了结点
-	myDFS(tree->root, sta, ch, &flag);	// 深度优先搜索，获取根到结点的路径，存入栈中
-	if(flag) {
-		return sta;
+	Stack sta = newStack();
+	BinTreeNode p = tree->root;		// 指向当前结点
+	BinTreeNode q = NULL;			// 指向刚刚访问过的结点
+	while (p != NULL || !isEmptySta(sta)) {
+		if (p != NULL) {			// 遍历左子树
+			pushSta(sta, p);
+			p = p->left;
+		}
+		else {
+			p = getTopSta(sta);
+			if (p->right == NULL || p->right == q) {	// 右子树已经遍历
+				//visit(p);
+				if (p->data == ch) {	// 如果找到了结点，此时栈中即路径
+					break;
+				}
+				q = p;			// 保存前驱
+				popSta(sta);
+				p = NULL;		// 当p=NULL时可回溯
+			}
+			else {
+				p = p->right;
+			}
+		}
 	}
-	else {
-		destoryStack(sta);
-		return NULL;
-	}
+	return sta;
 }
+//Stack getPath(BinTree const tree, char const ch)
+//{
+//	Stack sta = newStack();			// 存储根到结点的路径
+//	bool flag = false;				// 标记是否找到了结点
+//	myDFS(tree->root, sta, ch, &flag);	// 深度优先搜索，获取根到结点的路径，存入栈中
+//	if(flag) {
+//		return sta;
+//	}
+//	else {
+//		destoryStack(sta);
+//		return NULL;
+//	}
+//}
 
 // 打印栈中的内容
 void viewSta(Stack sta)
 {
 	printf("\nview stack: ");
-	printf("size= %d\n(", getStaSize(sta));
+	printf("size= %d\n(", getSizeSta(sta));
 
 	LinkStackNode* p = sta->top->next;
 	while (p != NULL) {
@@ -149,9 +177,9 @@ bool getLCA(BinTree const tree, char const ch1, char const ch2, char* ch3)
 	Stack path1 = getPath(tree, ch1);			// 获取根到结点的路径，存入栈中
 	Stack path2 = getPath(tree, ch2);
 
-	//assert(path1 != 0);
-	//assert(path2 != 0);
-	if(path1 == NULL || path2 == NULL) {			// 如果有一个结点不存在，返回false
+	assert(path1 != 0);
+	assert(path2 != 0);
+	if (isEmptySta(path1)|| isEmptySta(path2)) {	// 如果有一个结点不存在，返回false
 		destoryStack(path1);
 		destoryStack(path2);
 		return false;
@@ -160,24 +188,24 @@ bool getLCA(BinTree const tree, char const ch1, char const ch2, char* ch3)
 	//viewSta(path1);
 	//viewSta(path2);
 
-	if (getStaSize(path1) > getStaSize(path2)) {	// 排序，path1存更短的路径
+	if (getSizeSta(path1) > getSizeSta(path2)) {	// 排序，path1存更短的路径
 		Stack tmpSta = path1;
 		path1 = path2;
 		path2 = tmpSta;
 	}
-	while (getStaSize(path2) > getStaSize(path1)) {	// 保证path1的大小小于等于path2的大小
+	while (getSizeSta(path2) > getSizeSta(path1)) {	// 保证path1的大小小于等于path2的大小
 		popSta(path2);
 	}
-	if (getStaTop(path1) == getStaTop(path2)) {		// 如果两个路径的重叠，返回false
+	if (getTopSta(path1) == getTopSta(path2)) {		// 如果两个路径的重叠，返回false
 		destoryStack(path1);
 		destoryStack(path2);
 		return false;
 	}
-	while (getStaTop(path1) != getStaTop(path2)) {	// 找到最近公共祖先
+	while (getTopSta(path1) != getTopSta(path2)) {	// 找到最近公共祖先
 		popSta(path1);
 		popSta(path2);
 	}
-	*ch3 = getStaTop(path1)->data;
+	*ch3 = getTopSta(path1)->data;
 
 	destoryStack(path1);					// 释放栈空间
 	destoryStack(path2);
