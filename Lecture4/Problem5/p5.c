@@ -1,4 +1,9 @@
 /*
+题目：
+二叉树按照二叉链表的方式存储。编写程序，计算二叉树中叶子结点的数目并输出；
+编写程序，将二叉树的每个结点的左、右子树进行交换，
+请注意不是只交换结点的data值，而是左、右孩子指针指向的交换，
+最后输出交换后的二叉树的后序遍历序列。
 
 language: C.
 */
@@ -31,12 +36,12 @@ int main() {
 
 	// 交换左右子树，并统计叶子数量
 
-	g_treeNodeCount = 0;
-	travPost(tree, swapChilds);
-	printf("%d\n", g_treeNodeCount);
+	g_treeNodeCount = 0;				// 叶子数量
+	travPost(tree, swapChilds);			// 后序遍历，交换左右子树
+	printf("%d\n", g_treeNodeCount);	// 输出叶子数量
 	//travPost(tree, printTreeNode);
 	//printf("\n");
-	printLeaves(tree->root);
+	printLeaves(tree->root);			// 输出带拓展的遍历序列
 	printf("\n");
 
 	destoryBinTree(tree);

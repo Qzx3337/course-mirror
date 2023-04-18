@@ -62,6 +62,7 @@ BinTreeNode newBinTreeNode(DataType data)
 	return node;
 }
 
+/* 释放结点 */
 inline void destoryBinTreeNode(BinTreeNode root)
 {
 	if (root != NULL) {
@@ -113,16 +114,15 @@ inline void travLevelNode(BinTreeNode root, void(*visit)(BinTreeNode))
 {
     Queue q = newQueue();
 	pushQue(q, root);
-	while (!isEmptyQue(q))
-	{
+	while (!isEmptyQue(q)) {			// 队列不为空
 		BinTreeNode tmpNode = getBack(q);
-		popQue(q);
-		visit(tmpNode);
-		if (tmpNode->left) {
-			pushQue(q, tmpNode->left);
+		popQue(q);						// 出队
+		visit(tmpNode);					// 访问结点
+		if (tmpNode->left) {			// 左子树不为空
+			pushQue(q, tmpNode->left);	// 入队
 		}
-		if (tmpNode->right) {
-			pushQue(q, tmpNode->right);
+		if (tmpNode->right) {			// 右子树不为空
+			pushQue(q, tmpNode->right);	// 入队
 		}
 	}
 	freeQueue(q);
@@ -130,7 +130,7 @@ inline void travLevelNode(BinTreeNode root, void(*visit)(BinTreeNode))
 #undef QueueElemType
 
 // 获取树的深度
-inline int getTreeDepthNode(BinTreeNode root) // che
+inline int getTreeDepthNode(BinTreeNode root)
 {
 	int hl, hr, max;
     if (root == NULL) return 0;

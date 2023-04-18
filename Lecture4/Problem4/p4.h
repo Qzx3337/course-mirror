@@ -57,21 +57,24 @@ void printTreeNode(BinTreeNode const node)
 #define StackElemType BinTreeNode
 #include "LinkStack.h"
 
-/* 使用栈中序遍历二叉树 */
+/* 使用栈中序遍历二叉树
+参数：
+tree : 二叉树的指针；visit：函数指针，执行对二叉树节点的访问操作
+*/
 void travIn_Sta(BinTree tree, void (*visit)(BinTreeNode node))
 {
 	Stack stack = newStack();
-	BinTreeNode itNode = tree->root;
-	while (itNode != NULL || !isStaEmpty(stack)) {
-		while (itNode != NULL) {
+	BinTreeNode itNode = tree->root;		// 从二叉树根节点开始遍历
+	while (itNode != NULL || !isStaEmpty(stack)) {		// 二叉树非空或栈非空
+		while (itNode != NULL) {		// 遍历左子树
 			pushSta(stack, itNode);
 			itNode = itNode->left;
 		}
-		if (!isStaEmpty(stack)) {
-			itNode = getStaTop(stack);
+		if (!isStaEmpty(stack)) {		// 回退，遍历右子树
+			itNode = getStaTop(stack);	// 获取栈顶元素
 			popSta(stack);
 			visit(itNode);
-			itNode = itNode->right;
+			itNode = itNode->right;		// 遍历右子树
 		}
 	}
 	destoryBinTreeNode(itNode);

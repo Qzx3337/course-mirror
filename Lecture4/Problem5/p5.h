@@ -70,6 +70,7 @@ void swapChilds(BinTreeNode node)
 	}
 }
 
+/* 输出带拓展的遍历序列 */
 void printLeaves(BinTreeNode const node)
 {
 	if (node == NULL) {
