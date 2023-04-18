@@ -25,9 +25,9 @@ typedef struct _LinkStack {
 
 /******** 只读接口 **********/
 
-bool isStaEmpty(Stack const s);
-int getStaSize(Stack const s);
-StackElemType getStaTop(Stack const s);
+bool isEmptySta(Stack const s);
+int getSizeSta(Stack const s);
+StackElemType getTopSta(Stack const s);
 
 /******** 可写接口 ************/
 
@@ -39,17 +39,17 @@ void pushSta(Stack sta, StackElemType const data);
 
 /******** 实现  **************/
 
-inline bool isStaEmpty(Stack s)
+inline bool isEmptySta(Stack s)
 {
 	return s->size == 0;
 }
 
-inline int getStaSize(Stack s)
+inline int getSizeSta(Stack s)
 {
 	return s->size;
 }
 
-inline StackElemType getStaTop(Stack s)
+inline StackElemType getTopSta(Stack s)
 {
 	return s->top->next->data;
 }
