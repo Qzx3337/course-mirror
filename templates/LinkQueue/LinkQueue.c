@@ -37,7 +37,7 @@ int main() {
 }
 
 void printQueInfo(Queue que) {
-	printf("\nQueue Size = %d\n", getQueSize(que));
+	printf("\nQueue Size = %d\n", getSizeQue(que));
 	printf("back- ");
 	QueNode* it;
 	for (it=que->back->next; it!=NULL; it=it->next) {
