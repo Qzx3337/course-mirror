@@ -118,7 +118,7 @@ void travInThread(BinTree root, void(*visit)(BinTree))
             p = p->right;
             visit(p);
         }
-        if (p = p->right == NULL) return;
+        if ((p = p->right) == NULL) return;
     }
     //visit(p);
 }
