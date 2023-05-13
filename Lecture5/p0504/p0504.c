@@ -4,6 +4,11 @@
 根据输入信息创建图，采用邻接表的形式存储该图，并用深度优先遍历算法遍历该图，输出从编号最小顶点开始的遍历序列。
 各顶点的数据类型为int型。
 
+问题：
+题目测试数据是根据为了深度优先遍历设计好的。
+为什么递归实现时可以做到从小到大的顺序，而非递归遍历顺序会乱？
+DFS算法为课本P226 算法 7.6，7.7。
+
 language: C.
 */
 
@@ -20,6 +25,10 @@ language: C.
 #define VerDataType int
 #define MAXN 100
 #define MAXM 9999
+
+/// <summary>
+/// 下面是图结构的定义，部分接口实现
+/// </summary>
 
 typedef struct Arc {
 	int adjVex;
@@ -77,6 +86,52 @@ inline void destroyAdjGraph(AdjGraph* pag) {
 	free(pag);
 }
 
+/// <summary>
+/// 下面是题目相关的方法实现
+/// p0504.h
+/// </summary>
+
+bool visited[MAXN] = { 0 };
+
+/* 递归方法实现对图的遍历 */
+void DFS_AdjGraph(AdjGraph* g, int v0) {
+	Arc* p;
+	visited[v0] = true;
+	printf("%d ", g->vex[v0].data);
+	p = g->vex[v0].head->nextArc;
+	while (p) {
+		if (!visited[p->adjVex]) {
+			DFS_AdjGraph(g, p->adjVex);
+		}
+		p = p->nextArc;
+	}
+}
+
+/* 非递归方法实现对图的遍历 */
+void DFS_AdjGraph_1(AdjGraph* ag) {
+	int i, j;
+	int stack[MAXN], top = 0;
+	bool visited[MAXN] = { 0 };
+	Arc* p;
+	for (i = 1; i <= 1; i++) {
+	//for (i = 1; i <= ag->vexNum; i++) {
+		if (visited[i]) continue;
+		stack[top++] = i;
+		while (top) {
+			j = stack[--top];	
+			if (visited[j]) continue;
+			printf("%d ", ag->vex[j].data);
+			visited[j] = true;
+			p = ag->vex[j].head->nextArc;
+			while (p) {
+				if(!visited[p->adjVex]) stack[top++] = p->adjVex;
+				p = p->nextArc;
+			}
+		}
+	}
+	
+}
+
 
 int main() {
 
@@ -100,26 +155,12 @@ int main() {
 		//addArc(ag, k, j);
 	}
 
-	// 深度优先遍历
-	int stack[MAXN], top = 0;
-	bool visited[MAXN] = { 0 };
-	Arc* p;
-	for (i = 1; i <= ag->vexNum; i++) {
-		if (visited[i]) continue;
-		stack[top++] = i;
-		while (top) {
-			j = stack[--top];	
-			if (visited[j]) continue;
-			printf("%d ", ag->vex[j].data);
-			visited[j] = true;
-			p = ag->vex[j].head->nextArc;
-			while (p) {
-				if(!visited[p->adjVex]) stack[top++] = p->adjVex;
-				p = p->nextArc;
-			}
-		}
-	}
-	
+	// DFS遍历
+
+	DFS_AdjGraph(ag, 1);
+	printf("\n");
+	//DFS_AdjGraph_1(ag);
+	//printf("\n");
 
 	return 0;
 }
