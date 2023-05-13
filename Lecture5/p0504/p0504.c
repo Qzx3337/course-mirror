@@ -66,7 +66,7 @@ inline void addArc(AdjGraph* pag, int start, int end) {
 inline void destroyAdjGraph(AdjGraph* pag) {
 	int i;
 	Arc* p, * q;
-	for (int i = 1; i <= pag->vexNum; i++) {
+	for (i = 1; i <= pag->vexNum; i++) {
 		p = pag->vex[i].head;
 		while (p) {
 			q = p;
@@ -80,7 +80,7 @@ inline void destroyAdjGraph(AdjGraph* pag) {
 
 int main() {
 
-	freopen("p0504.in", "r", stdin);
+	//freopen("p0504.in", "r", stdin);
 	//freopen("p0504.out", "w", stdout);
 
 	// ∂¡»Î
