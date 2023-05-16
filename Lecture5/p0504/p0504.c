@@ -142,13 +142,13 @@ void DFS_AdjGraph_1(AdjGraph* ag) {
 
 
 int main() {
-
 	//freopen("p0504.in", "r", stdin);
 	//freopen("p0504.out", "w", stdout);
 
 	int i, j, k;
 
 	// ∂¡»Î
+
 	int n, data;
 	AdjGraph* ag = newAdjGraph();
 	scanf("%d", &n);
