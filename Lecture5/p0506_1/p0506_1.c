@@ -20,33 +20,34 @@ language: C.
 #include <assert.h>
 #define INF 0x7FFFFFFF
 
-#define MAXN 1001
-#define MAXM 5001
+#define MAXN 1001		// 最大罪犯数量
+#define MAXM 5001		// 最大关系数量
 
-int fa[MAXN];		// father
+int fa[MAXN];		// father 
 
+// 递归寻找祖先 
 int getFather(int const cur)
 {
-	if (fa[cur] == cur) return cur;
-	return (fa[cur] = getFather(fa[cur]));
+	if (fa[cur] == cur) return cur;			// 找到祖先
+	return (fa[cur] = getFather(fa[cur]));	// 路径压缩
 }
 
 int main(int argc, char const **argv) {
-	freopen("p0506.in", "r", stdin);
+	//freopen("p0506.in", "r", stdin);
 	//freopen("p0506.out", "w", stdout);
 
 	int i;
-	int m, n;
+	int m, n;			// m:关系数量, n:罪犯数量
 	scanf("%d%d", &n, &m);
-	for (i = 1; i <= n; i++) fa[i] = i;
+	for (i = 1; i <= n; i++) fa[i] = i;		// 初始化
 	int head, tail;
 	for (i = 1; i <= m; i++) {
 		scanf("%d%d", &head, &tail);
-		fa[getFather(tail)] = head;
+		fa[getFather(tail)] = head;			// 合并
 	}
 
-	int ans = 0;
-	for (i = 1; i <= n; i++) {
+	int ans = 0;		// 犯罪团伙数量
+	for (i = 1; i <= n; i++) {		// 统计祖先数量
 		if (getFather(i) == i) {
 			ans++;
 		}
