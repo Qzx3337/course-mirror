@@ -103,32 +103,33 @@ void printGraph(MatGraph* const g)
 #include <queue>
 int countComponent(MatGraph* const g);	// 计算连通分量个数
 
+// 计算连通分量个数
 int countComponent(MatGraph* const g)
 {
 	int i, j;
-	int cnt = 0;
-	int curr;
-	bool visited[MAXN] = { false };
-	std::queue <int> que;
-	for (i = 1; i <= g->n; i++) {
-		if (!visited[i]) {
-			que.push(i);
-			cnt++;
-			while (!que.empty()) {
-				curr = que.front();
-				que.pop();
-				visited[curr] = true;
-				for (j = 1; j <= g->n; j++) {
-					if (g->edge[curr][j].adj) {
-						if (!visited[j]) {
-							que.push(j);
+	int cnt = 0;		// 连通分量个数
+	int curr;			// 当前顶点
+	bool visited[MAXN] = { false };		// 访问标记数组
+	std::queue <int> que;			// 辅助队列
+	for (i = 1; i <= g->n; i++) {		// 遍历所有顶点
+		if (!visited[i]) {				// 未访问过
+			que.push(i);				// 入队
+			cnt++;						// 连通分量个数加1
+			while (!que.empty()) {		// 队列非空
+				curr = que.front();		// 更新当前顶点
+				que.pop();				// 出队
+				visited[curr] = true;	// 标记为已访问
+				for (j = 1; j <= g->n; j++) {		// 遍历所有顶点
+					if (g->edge[curr][j].adj) {		// 与当前顶点相邻
+						if (!visited[j]) {			// 未访问过
+							que.push(j);			// 入队
 						}
 					}
 				}
 			}
 		}
 	}
-	return cnt;
+	return cnt;			// 返回连通分量个数
 }
 
 
