@@ -30,21 +30,25 @@ language: C.
 /// 下面是图结构的定义，部分接口实现
 /// </summary>
 
+// 邻接表
 typedef struct Arc {
 	int adjVex;
 	struct Arc* nextArc;
 }Arc;
 
+// 顶点
 typedef struct Vertex {
 	VerDataType data;
 	struct Arc* head;
 }Vertex;
 
+// 图
 typedef struct _AdjGraph {
 	int vexNum, arcNum;
 	Vertex vex[MAXN + 1];
 }AdjGraph;
 
+// 创建新的弧
 inline Arc* newArc(int adjVex, Arc* nextArc) {
 	Arc* pa = (Arc*)malloc(sizeof(Arc));
 	if (pa == NULL) exit(OVERFLOW);
@@ -53,6 +57,7 @@ inline Arc* newArc(int adjVex, Arc* nextArc) {
 	return pa;
 }
 
+// 创建新的图
 inline AdjGraph* newAdjGraph() {
 	AdjGraph* pag = (AdjGraph*)malloc(sizeof(AdjGraph));
 	if (pag == NULL) exit(OVERFLOW);
@@ -61,17 +66,20 @@ inline AdjGraph* newAdjGraph() {
 	return pag;
 }
 
+// 添加顶点
 inline void addVex(AdjGraph* pag, VerDataType data) {
 	pag->vexNum++;
 	pag->vex[pag->vexNum].data = data;
 	pag->vex[pag->vexNum].head = newArc(0, NULL);
 }
 
+// 添加弧
 inline void addArc(AdjGraph* pag, int start, int end) {
 	pag->arcNum++;
 	pag->vex[start].head->nextArc = newArc(end, pag->vex[start].head->nextArc);
 }
 
+// 销毁图
 inline void destroyAdjGraph(AdjGraph* pag) {
 	int i;
 	Arc* p, * q;
@@ -138,8 +146,9 @@ int main() {
 	//freopen("p0504.in", "r", stdin);
 	//freopen("p0504.out", "w", stdout);
 
-	// 读入
 	int i, j, k;
+
+	// 读入
 	int n, data;
 	AdjGraph* ag = newAdjGraph();
 	scanf("%d", &n);
