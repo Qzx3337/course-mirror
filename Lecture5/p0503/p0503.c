@@ -5,6 +5,7 @@ language: C.
 */
 
 
+#define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +14,6 @@ language: C.
 #include <stdbool.h>
 #include <assert.h>
 
-#define _CRT_SECURE_NO_WARNINGS 1
 #define INF 0x7FFFFFFF
 #define MAXN 20				// 最大字符数
 #define MAXM (2 * MAXN - 1)		// 最大结点数
