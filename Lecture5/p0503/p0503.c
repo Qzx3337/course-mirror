@@ -31,7 +31,6 @@ int n;		// 字符数
 HTNode HuffmanTree[MAXM + 1];		// 哈夫曼树
 
 int main() {
-
 	//freopen("p0503.in", "r", stdin);
 	//freopen("p0503.out", "w", stdout);
 
@@ -40,7 +39,7 @@ int main() {
 	int i, j, k;
 	scanf("%d", &n);
 	for (i = 1; i <= n; i++) {
-		scanf("%d", &HuffmanTree[i].weight);
+		scanf("%d", &HuffmanTree[i].weight);		// 初始化
 		HuffmanTree[i].father = 0;
 		HuffmanTree[i].LChild = 0;
 		HuffmanTree[i].RChild = 0;
@@ -50,8 +49,8 @@ int main() {
 
 	int min1, min2;		// 最小的两个权值
 	int x1, x2;			// 最小的两个权值结点的下标
-	for (i = n + 1; i <= 2 * n - 1; i++) {
-		min1 = min2 = INF;
+	for (i = n + 1; i <= 2 * n - 1; i++) {		 // 一共需要构造n-1次
+		min1 = min2 = INF;		// 寻找最小的两个权值
 		x1 = x2 = 0;
 		for (j = 1; j < i; j++) {
 			if (HuffmanTree[j].father == 0) {
@@ -67,6 +66,7 @@ int main() {
 				}
 			}
 		}
+		// 合并
 		HuffmanTree[x1].father = i;
 		HuffmanTree[x2].father = i;
 		HuffmanTree[i].LChild = x1;
@@ -78,20 +78,20 @@ int main() {
 
 	char code[MAXN + 1];
     code[n] = '\0';
-	for (i = 1; i <= n; i++) {
-		j = i;
-		k = n - 1;
-		while (HuffmanTree[j].father != 0) {
+	for (i = 1; i <= n; i++) {		// 依次输出每个字符的编码
+		j = i;					// 从叶子结点开始
+		k = n - 1;				// 编码的最后一位
+		while (HuffmanTree[j].father != 0) {		// 一直向上直到根结点
 			if (HuffmanTree[HuffmanTree[j].father].LChild == j) {
-				code[k] = '0';
+				code[k] = '0';		//  左孩子编码为0
 			}
 			else if(HuffmanTree[HuffmanTree[j].father].RChild == j){
-				code[k] = '1';
+				code[k] = '1';		// 右孩子编码为1
 			}
 			else {
-				assert(false);
+				assert(false);		// 非法 // 一般不会出现
 			}
-			k--;
+			k--;			// 继续向上
 			j = HuffmanTree[j].father;
 		}
 		printf("%s\n", code + k + 1);
