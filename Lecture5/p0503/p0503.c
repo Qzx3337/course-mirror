@@ -76,7 +76,7 @@ int main() {
 	// 输出
 
 	char code[MAXN + 1];
-    code[n] = '\0';
+	code[n] = '\0';
 	for (i = 1; i <= n; i++) {		// 依次输出每个字符的编码
 		j = i;					// 从叶子结点开始
 		k = n - 1;				// 编码的最后一位
