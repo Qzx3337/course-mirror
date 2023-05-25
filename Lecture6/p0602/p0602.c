@@ -134,6 +134,8 @@ int main(int argc, char const** argv) {
 		printf("DAG\n");		// Á½±é
 	}
 
+	// TODO: destroyAdjGraph()
+
 	return 0;
 }
 

@@ -55,6 +55,9 @@ inline Graph* newGraph()
 	return g;
 }
 
+// 销毁图
+// TODO: destroyAdjGraph()
+
 // 向图中添加新结点
 void addVertex(Graph* g, VertexData const data)
 {
@@ -142,6 +145,8 @@ int main(int argc, char const **argv) {
 		}
 	}
 	printf("\n");
+
+	// TODO: destroyAdjGraph()
 
 	return 0;
 }
