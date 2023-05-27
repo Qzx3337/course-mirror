@@ -134,9 +134,7 @@ bool cmpDjs(DjsNode a, DjsNode b)
 //*********** heap_h 
 
 #define HCAPACITY MAXN
-#ifndef HeapDataType
 #define HeapDataType DjsNode
-#endif // !HeapDataType
 
 typedef struct Heap {
     HeapDataType* data;
