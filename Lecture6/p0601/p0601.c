@@ -1,8 +1,10 @@
 /***
+language: C.
+
 1、拓扑排序
 顶点编号从0开始。
 
-language: C.
+TODO: 没有用 locateVex() 函数寻通过 id 查找结点，而是直接使用了数组下标，
 ***/
 
 #define _CRT_SECURE_NO_WARNINGS 1
