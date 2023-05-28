@@ -15,7 +15,7 @@ language: C.
 如果不存在从源点至相应顶点的路径，则输出-1。
 注意: 各输出数据间用1个空格分隔, 行尾输出换行。
 
-TODO: 没有用 locateVex() 函数寻通过 id 查找结点，而是直接使用了数组下标，
+TODO: 没有用 locateVex() 函数通过 id 查找结点，而是直接使用了数组下标，
 ***/
 
 #define _CRT_SECURE_NO_WARNINGS 1
