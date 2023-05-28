@@ -107,30 +107,6 @@ void addEdge(Graph* g, int const start, int const end, int const distance)
     g->vex[start].head->next = newEdge(end, distance, g->vex[start].head->next);
 }
 
-/*** djstra 结点 **/
-typedef struct DjsNode {
-    int dis;
-    int pos;
-}DjsNode;
-
-DjsNode makeDjsNode(int const dis, int const pos)
-{
-    DjsNode n;
-    n.dis = dis;
-    n.pos = pos;
-    return n;
-}
-
-bool cmpDjs(DjsNode a, DjsNode b)
-{
-    if (a.dis < b.dis) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
 //********* !Graph_h
 
 //**** 题目方法
@@ -186,7 +162,7 @@ int main(int argc, char const** argv) {
     int curNode;
     while (true) {
         curNode = getClosest(g);
-        if (curNode == -1) break;    // 如果没有找到，则退出
+        if (curNode == -1) break;   // 如果没有找到，则退出
         visited[curNode] = true;    // 标记为已访问
         for (itEdge = g->vex[curNode].head->next; itEdge != NULL; itEdge = itEdge->next) {  // 遍历该元素的所有邻接边
             if (dis[itEdge->adjVex] > dis[curNode] + itEdge->dis) {     // 如果该边的另一个顶点的距离大于该边的权值加上该元素的距离
@@ -201,8 +177,6 @@ int main(int argc, char const** argv) {
     // 2.从起点开始，每次选择一个距离最小的点，标记为已访问
     // 3.遍历该点的所有邻接边，如果该边的另一个顶点的距离大于该边的权值加上该元素的距离，则更新该顶点的距离，并更新前驱
     // 4.重复2，3步骤，直到所有点都访问过
-
-
 
     // 输出
     for (i = 0; i < n; i++) {
