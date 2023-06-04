@@ -60,7 +60,7 @@ void test1()
 
 int main(int argc, char const **argv)
 {
-	freopen("p0607.in", "r", stdin);
+	//freopen("p0607.in", "r", stdin);
 	//freopen("p0607.out", "w", stdout);
 
 	test1();
