@@ -73,6 +73,15 @@ inline void insertBST(BSTree* root, KeyType const key)
 	}
 }
 
+// ÊÍ·Å BSTree
+void freeBST(BSTree tree)
+{
+	if (tree == NULL) return;
+	freeBST(tree->left);
+	freeBST(tree->right);
+	free(tree);
+}
+
 void readTree(BSTree* tree)
 {
 	int key;
@@ -156,7 +165,7 @@ BSTNode* findBST(BSTree const tree, KeyType const key)
 
 int main(int argc, char const **argv)
 {
-	//freopen("p0606.in", "r", stdin);
+	freopen("p0606.in", "r", stdin);
 	//freopen("p0606.out", "w", stdout);
 
 	BSTree tree = NULL;
@@ -170,6 +179,7 @@ int main(int argc, char const **argv)
 	printBSTTravIn(tree);
 	printf("\n");
 	findBST(tree, y);
+	freeBST(tree);
 
 	return 0;
 }
