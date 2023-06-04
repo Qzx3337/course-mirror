@@ -36,7 +36,7 @@ int cmpFun(int* const a, int* const b)
 	return (*a - *b);
 }
 
-void bubbling_sort()
+void bubbling_sort(int* arr)
 {
 	qsort(arr, MAXN, sizeof(int), cmpFun);
 }
