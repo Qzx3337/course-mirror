@@ -47,13 +47,13 @@ int main(int argc, char const** argv)
 	int i;
 	int n;	// 座位上坐了n个人，有序
 	scanf("%d", &n);
-	for (i = 0; i < n; i++) {
+	for (i = 1; i <= n; i++) {
 		scanf("%s", seat[i]);
 	}
 
 	char name[MAXL];		// 待查找的人名
 	scanf("%s", name);
-	int pos = find(name, 0, n - 1);	// 查找人名，返回座位号
+	int pos = find(name, 1, n);	// 查找人名，返回座位号
 	if (pos == -1) {
 		printf("None\n");
 	}
